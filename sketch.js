@@ -23,6 +23,12 @@ function setup() {
 
   foodStock=database.ref('Food');
   foodStock.on("value",readStock);
+
+   fedTime=database.ref('FeedTime');
+  fedTime.on("value",function(data){
+    lastFed=data.val();
+  });
+
   
   dog=createSprite(800,200,150,150);
   dog.addImage(sadDog);
@@ -108,6 +114,7 @@ function feedDog(){
 //function to add food in stock
 function addFoods(){
   foodS++;
+  foodObj = new Food()
   database.ref('/').update({
     Food:foodS
   })
